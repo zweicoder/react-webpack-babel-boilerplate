@@ -8,26 +8,26 @@ var config = {
 	entry: [
   'webpack-dev-server/client?http://localhost:3000', // WebpackDevServer host and port
   'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
-  APP_DIR + '/index.jsx' // Your appʼs entry point
+  path.resolve(APP_DIR, 'index.jsx') // Your appʼs entry point
   ],
 
   output: {
   	path: BUILD_DIR,
   	filename: 'bundle.js',
-  	publicPath: BUILD_DIR
+  	publicPath: path.resolve(BUILD_DIR, 'static')
   },
 
   module : {
-  	loaders : [
-  	{
+  	loaders : [{
   		test : /\.jsx?/,
   		include : APP_DIR,
   		loaders : [
         'react-hot', // React hot-loader
         'babel'
-        ]
-    }
-    ]
+        ],
+        include: path.join(__dirname, 'src')
+    }]
+
 
 },
 
